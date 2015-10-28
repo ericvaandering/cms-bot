@@ -3,7 +3,9 @@
 start=`date +%s`
 
 # ensure db exists
-echo "CREATE DATABASE IF NOT EXISTS WMCore_unit_test" | mysql -u ${MYSQL_USER} --password=${MYSQL_PASS} --socket=${DBSOCK}
+if [[ "$SQL_FLAVOR" == "mysql" ]]; then
+  echo "CREATE DATABASE IF NOT EXISTS WMCore_unit_test" | mysql -u ${MYSQL_USER} --password=${MYSQL_PASS} --socket=${DBSOCK}
+fi
 set -x
 
 # working dir includes entire python source - ignore
