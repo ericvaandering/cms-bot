@@ -1,7 +1,9 @@
 #! /bin/bash -e
 start=`date +%s`
 
-export DBSOCK=/tmp/`uuidgen`-mysql.sock
+if [[ "$SQL_FLAVOR" == "mysql" ]]; then
+  export DBSOCK=/tmp/`uuidgen`-mysql.sock
+fi
 
 echo "Deploying wmagent@$WMAGENT_VERSION from $COMP_REPO"
 $PWD/deployment/Deploy -R wmagent-dev@${WMAGENT_VERSION} -r comp=$COMP_REPO -t $WMAGENT_VERSION -A $DMWM_ARCH -s 'prep sw post' $PWD/deploy admin/devtools wmagent
