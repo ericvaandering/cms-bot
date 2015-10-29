@@ -33,6 +33,10 @@ coverage erase
 # run test - force success though - failure stops coverage report
 rm nosetests*.xml || true
 ./cms-bot/DMWM/TestWatchdog.py &
+
+echo $DBSOCK || true
+echo $DIALECT || true
+echo $DATABASE || true
 python code/setup.py test --buildBotMode=true --reallyDeleteMyDatabaseAfterEveryTest=true --testCertainPath=code/test/python --testTotalSlices=$SLICES --testCurrentSlice=$SLICE || true #--testCertainPath=test/python/WMCore_t/WMBS_t || true
 mv nosetests.xml nosetests-$SLICE-$BUILD_ID.xml
 
